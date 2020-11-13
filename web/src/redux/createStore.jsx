@@ -1,3 +1,8 @@
 import { createStore } from "redux";
 
-const store = createStore();
+function store(){
+    // const myStore = createStore();
+    // return myStore;
+}
+
+export default store;
