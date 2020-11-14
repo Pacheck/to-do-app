@@ -5,18 +5,22 @@ import './App.css';
 //Importing components
 import Nav from '../Nav';
 import Landing from '../Landing';
+import Starred from '../Starred';
+import Finished from '../Finished';
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <div className="container">
-        <BrowserRouter>
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
           <Switch>
             <Route path="/" exact component={Landing} />
+            <Route path="/importante" component={Starred} />
+            <Route path="/finalizados" component={Finished} />
           </Switch>
-        </BrowserRouter>
-      </div>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
