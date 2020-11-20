@@ -6,10 +6,11 @@ export const add = (name, text) => {
   };
 };
 
-export const edit = (name, text) => {
+export const edit = (name, index, text) => {
   return {
     name: name,
     type: 'EDIT',
+    index: index,
     payload: text,
   };
 };

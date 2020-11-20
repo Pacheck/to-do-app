@@ -14,9 +14,11 @@ function createTodosReducer(counterName = '') {
       case ADD:
         return state.concat(payload);
       case EDIT:
-        return state;
+        return state.map((item, index) =>
+          index === action.index ? (item = payload) : item
+        );
       case DELETE:
-        return state.filter((item, index) => index != payload);
+        return state.filter((item, index) => index !== payload);
       default:
         return state;
     }
