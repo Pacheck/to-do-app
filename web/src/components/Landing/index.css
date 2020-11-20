@@ -5,8 +5,17 @@
   min-width: 500px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   background: rgb(27, 93, 236);
 }
+
+/* form {
+  height: 30vh;
+}
+
+ul {
+  height: 70vh;
+} */

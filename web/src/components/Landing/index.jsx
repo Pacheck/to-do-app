@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './index.css'
 
 // import Textbar from '../Textbar'
+import Task from '../Task';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,14 +14,13 @@ const Landing = () => {
     const dispatch = useDispatch();
 
     const landingReducer = useSelector(state => state.landingTodos);
-    console.log(landingReducer)
-
-    const tasks = ['Learn React', 'Learn Redux', 'Learn UX/UI', 'Learn Angular'];
 
     function handleSubmit(e){
         e.preventDefault();
         const value = e.target[0].value;
 
+        console.log({ type: 'dispatch', value: value})
+        
         dispatch(add('Landing', value))
     }
 
@@ -29,17 +29,28 @@ const Landing = () => {
         dispatch(del('Landing', index))
     }
 
+    function handleEditTask(index, e){
+        dispatch(edit('Landing', index, e.target.innerText))
+    }
+
+  
+
     return (
         <div className="landing">
-            <div>
-                {tasks.map((task, index) => {
-                    return <h3 key={index} >{task}</h3>
-                })}
-            </div>
 
-            {landingReducer.map((task, index) => {
-                return <h2 key={index} onClick={() => handleDeleteTask(index)}>{task}</h2>
-            })}
+           <ul>
+                {landingReducer.map((task, index) => {
+                    return (
+                        <li key={index}>
+                            <Task 
+                                task={task} 
+                                index={index} 
+                                handleEditTask={handleEditTask}
+                            />
+                        </li>
+                    )
+                })}
+           </ul>
 
             <form onSubmit={handleSubmit}>
                 <input type="text"/>
