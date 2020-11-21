@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { edit } from '../../redux/actions';
+import { edit, del } from '../../redux/actions';
+
+import './index.css'
 
 import { MdEdit } from 'react-icons/md'
+import { ImCheckmark2 } from 'react-icons/im'
+import { AiOutlineDelete } from 'react-icons/ai'
 
-const Task = ({ index, task, handleEditTask}) => {
+const Task = ({ reducerType, index, task }) => {
 
     const [onEdit, setOnEdit] = useState(false);
     const [newInputValue, setNewInputValue] = useState('');
@@ -15,24 +19,29 @@ const Task = ({ index, task, handleEditTask}) => {
 
     function handleBlur () {
         setOnEdit(false)
-        dispatch(edit('Landing', index, newInputValue))
+        dispatch(edit(reducerType, index, newInputValue))
+        console.log({ type: 'dispatch/edit', value: newInputValue})
     }
 
     return (
         onEdit 
             ? 
         <div>
-            <input defaultValue={task} 
-                onBlur={handleBlur } 
+            <input 
+                autoFocus
+                defaultValue={task}    
                 onChange={(e) => setNewInputValue(e.target.value)}
+                onBlur={handleBlur}
             /> 
+            <ImCheckmark2 onClick={handleBlur}/>
         </div>
             :
         <div>
-            <p onDoubleClick={() => setOnEdit(true)}>
+            <p>
                 {task}
             </p>
-            <MdEdit />
+            <MdEdit onClick={() => setOnEdit(true)} />
+            <AiOutlineDelete onClick={() => { dispatch(del(reducerType, index)) }}/>
         </div>
     )        
     
