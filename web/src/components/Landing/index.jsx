@@ -1,39 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './index.css'
 
-// import Textbar from '../Textbar'
-import Task from '../Task';
+import Form from '../Form';
+import Task from '../Task'
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import { add, edit, del } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
 const Landing = () => {
 
-    const dispatch = useDispatch();
+    const Landing = 'Landing'
 
     const landingReducer = useSelector(state => state.landingTodos);
-
-    function handleSubmit(e){
-        e.preventDefault();
-        const value = e.target[0].value;
-
-        console.log({ type: 'dispatch', value: value})
-        
-        dispatch(add('Landing', value))
-    }
-
-    function handleDeleteTask(index) {
-        console.log(index)
-        dispatch(del('Landing', index))
-    }
-
-    function handleEditTask(index, e){
-        dispatch(edit('Landing', index, e.target.innerText))
-    }
-
-  
 
     return (
         <div className="landing">
@@ -43,22 +21,17 @@ const Landing = () => {
                     return (
                         <li key={index}>
                             <Task 
+                                reducerType={Landing}
                                 task={task} 
                                 index={index} 
-                                handleEditTask={handleEditTask}
                             />
                         </li>
                     )
                 })}
            </ul>
 
-            <form onSubmit={handleSubmit}>
-                <input type="text"/>
-                <button type="submit">Adicionar a tasks</button>
-            </form>
+            <Form reducerType={Landing} />
 
-
-            {/* <Textbar /> */}
         </div>
     )
 }
