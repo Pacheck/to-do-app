@@ -22,3 +22,12 @@ export const del = (name, index) => {
     payload: index,
   };
 };
+
+export const finish = (name, taskOwner, text) => {
+  return {
+    name: name,
+    type: 'FINISH',
+    taskOwner: taskOwner,
+    payload: text,
+  };
+};
