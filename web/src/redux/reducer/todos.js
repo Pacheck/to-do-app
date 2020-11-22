@@ -9,6 +9,7 @@ function createTodosReducer(counterName = '') {
     const ADD = 'ADD';
     const DELETE = 'DELETE';
     const EDIT = 'EDIT';
+    const FINISH = 'FINISH';
 
     switch (type) {
       case ADD:
@@ -19,6 +20,8 @@ function createTodosReducer(counterName = '') {
         );
       case DELETE:
         return state.filter((item, index) => index !== payload);
+      case FINISH:
+        return state.concat({ payload: payload, taskOwner: action.taskOwner });
       default:
         return state;
     }
