@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { edit, del } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+import { edit, del, finish } from '../../redux/actions';
 
 import './index.css'
 
@@ -15,12 +15,16 @@ const Task = ({ reducerType, index, task }) => {
 
     const dispatch = useDispatch();
 
-    const landingReducer = useSelector(state => state.landingTodos);
-
     function handleBlur () {
         setOnEdit(false)
         dispatch(edit(reducerType, index, newInputValue))
         console.log({ type: 'dispatch/edit', value: newInputValue})
+    }
+
+    const handleFinishTask = () => {
+        dispatch(finish('Finished', reducerType, task))
+        dispatch(del(reducerType, index));
+        console.log({ type: 'dispatch/finish', value: task})
     }
 
     return (
@@ -36,12 +40,13 @@ const Task = ({ reducerType, index, task }) => {
             <ImCheckmark2 onClick={handleBlur}/>
         </div>
             :
-        <div>
-            <p>
-                {task}
-            </p>
-            <MdEdit onClick={() => setOnEdit(true)} />
-            <AiOutlineDelete onClick={() => { dispatch(del(reducerType, index)) }}/>
+        <div className="task">
+            <input type="checkbox" defaultValue={task} placeholder={task} onClick={handleFinishTask}/>
+            <h3>{task}</h3>
+            <div className="task-actions">
+                <MdEdit onClick={() => setOnEdit(true)} />
+                <AiOutlineDelete onClick={() => { dispatch(del(reducerType, index)) }}/>
+            </div>
         </div>
     )        
     
