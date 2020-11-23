@@ -1,29 +1,32 @@
 import React from 'react';
 
-import './index.css'
-
+import { useHistory } from "react-router-dom"
+import { BsArrowLeft } from 'react-icons/bs'
 import { useSelector } from 'react-redux';
 
 import Form from '../Form';
 import Task from '../Task';
 
 const Starred = () => {
-
+    const history = useHistory();
     const starredReducer = useSelector(state => state.starredTodos);
 
     const Starred = 'Starred';
 
+    const handleNavigateHome = () => {
+        history.push('/');
+    }
+
     return (
         <div className="starred">
-            
+            < BsArrowLeft onClick={handleNavigateHome} />
             <ul>
-                {starredReducer.map((task, index) => {
+                {starredReducer.map((task) => {
                     return (
-                        <li key={index}>
+                        <li key={task.id}>
                             <Task 
                                 reducerType={Starred}
-                                task={task} 
-                                index={index} 
+                                task={task}  
                             />
                         </li>
                     )
