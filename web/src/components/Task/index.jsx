@@ -8,23 +8,42 @@ import { MdEdit } from 'react-icons/md'
 import { ImCheckmark2 } from 'react-icons/im'
 import { AiOutlineDelete } from 'react-icons/ai'
 
-const Task = ({ reducerType, index, task }) => {
+const Task = ({ reducerType, task }) => {
 
     const [onEdit, setOnEdit] = useState(false);
     const [newInputValue, setNewInputValue] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
 
     const dispatch = useDispatch();
 
-    function handleBlur () {
+    const { id, taskOwner, text } = task;
+
+    const handleFinishTask = () => {
+        const payload = {
+            taskOwner,
+            id,
+            text
+        }
+
+        dispatch(finish('Finished', payload));
+
+        handleDeleteTask();
+
+        console.log({ type: 'dispatch/finish', value: task})
+    }
+
+    const handleEditTask = () => {
         setOnEdit(false)
-        dispatch(edit(reducerType, index, newInputValue))
+        const payload = {
+            ...task,
+            text: newInputValue
+        }
+        dispatch(edit(reducerType, payload))
         console.log({ type: 'dispatch/edit', value: newInputValue})
     }
 
-    const handleFinishTask = () => {
-        dispatch(finish('Finished', reducerType, task))
-        dispatch(del(reducerType, index));
-        console.log({ type: 'dispatch/finish', value: task})
+    const handleDeleteTask = () => {
+        dispatch(del(reducerType, id));
     }
 
     return (
@@ -33,23 +52,23 @@ const Task = ({ reducerType, index, task }) => {
         <div>
             <input 
                 autoFocus
-                defaultValue={task}    
+                defaultValue={task.text}    
                 onChange={(e) => setNewInputValue(e.target.value)}
-                onBlur={handleBlur}
+                onBlur={handleEditTask}
             /> 
-            <ImCheckmark2 onClick={handleBlur}/>
+            <ImCheckmark2 onClick={handleEditTask}/>
         </div>
             :
         <div className="task">
-            <input type="checkbox" defaultValue={task} placeholder={task} onClick={handleFinishTask}/>
-            <h3>{task}</h3>
+            <input type="checkbox" onClick={handleFinishTask} />
+            <h3>{task.text}</h3>
             <div className="task-actions">
                 <MdEdit onClick={() => setOnEdit(true)} />
-                <AiOutlineDelete onClick={() => { dispatch(del(reducerType, index)) }}/>
+                <AiOutlineDelete onClick={handleDeleteTask}/>
             </div>
         </div>
     )        
-    
+
 }
 
 export default Task;
