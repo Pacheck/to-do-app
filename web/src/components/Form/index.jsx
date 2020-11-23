@@ -1,10 +1,10 @@
 import React from 'react';
-
-import './index.css'
-
+import { v4 as uuid_v4 } from "uuid";
 import { useDispatch } from 'react-redux';
 
 import { add } from '../../redux/actions';
+
+import './index.css'
 
 const Form = ({ reducerType }) => {
 
@@ -14,9 +14,15 @@ const Form = ({ reducerType }) => {
         e.preventDefault();
         const value = e.target[0].value;
 
-        console.log({ type: 'dispatch/add', value: value})
+        const payload = {
+            text : value,
+            id: uuid_v4(),
+            taskOwner: reducerType
+        }
         
-        dispatch(add( reducerType, value))
+        console.log({ type: 'dispatch/add', payload: payload})
+        
+        dispatch(add(reducerType, payload))
 
         e.target[0].value = '';
     }
