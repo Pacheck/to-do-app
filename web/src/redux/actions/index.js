@@ -1,33 +1,31 @@
-export const add = (name, text) => {
+export const add = (name, payload) => {
   return {
     name: name,
     type: 'ADD',
-    payload: text,
+    payload,
   };
 };
 
-export const edit = (name, index, text) => {
+export const edit = (name, payload) => {
   return {
     name: name,
     type: 'EDIT',
-    index: index,
-    payload: text,
+    payload,
   };
 };
 
-export const del = (name, index) => {
+export const del = (name, id) => {
   return {
     name: name,
     type: 'DELETE',
-    payload: index,
+    payload: id,
   };
 };
 
-export const finish = (name, taskOwner, text) => {
+export const finish = (name, payload) => {
   return {
     name: name,
     type: 'FINISH',
-    taskOwner: taskOwner,
-    payload: text,
+    payload,
   };
 };
