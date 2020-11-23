@@ -1,32 +1,43 @@
 import React from 'react';
 
-import './index.css'
+// import './index.css'
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { add } from '../../redux/actions'
+import { useHistory } from "react-router-dom"
+import { BsArrowLeft } from 'react-icons/bs'
+
+import { add, del } from '../../redux/actions'
 
 const Finished = () => {
-
+    const history = useHistory();
     const finishedReducer = useSelector(state => state.finishedTodos );
-
 
     const dispatch = useDispatch(); 
 
-    const handleUncheckTask = (task) => {
-        dispatch(add(task.taskOwner, task.payload))
+    const handleNavigateHome = () => {
+        history.push('/');
     }
 
-    console.log(finishedReducer)
+    const handleUncheckTask = (task) => {
+        const payload = { ...task }
+
+        dispatch(add(payload.taskOwner, payload))
+        dispatch(del('Finished', payload.id))
+        console.log({ type: 'dispatch/del', value: payload.id})
+    }
 
     return (
         <div className="finished">
-           {finishedReducer.map((task, index) => (
-               <div key={index}>
-                   <input type="checkbox" defaultChecked onClick={() => handleUncheckTask(task)}/>
-                   <h2>{task.payload}</h2>
-               </div>
-           ))}
+            <BsArrowLeft onClick={handleNavigateHome}/>
+           <ul>
+                {finishedReducer.map(task => (
+                    <li key={task.id}>
+                        <input type="checkbox" defaultChecked onClick={() => handleUncheckTask(task)}/>
+                        <h2>{task.text}</h2>
+                    </li>
+                ))}
+           </ul>
         </div>
     )
 }
