@@ -15,13 +15,13 @@ function createTodosReducer(counterName = '') {
       case ADD:
         return state.concat(payload);
       case EDIT:
-        return state.map((item, index) =>
-          index === action.index ? (item = payload) : item
+        return state.map((item) =>
+          item.id === payload.id ? (item = payload) : item
         );
       case DELETE:
-        return state.filter((item, index) => index !== payload);
+        return state.filter((item) => item.id !== payload);
       case FINISH:
-        return state.concat({ payload: payload, taskOwner: action.taskOwner });
+        return state.concat(payload);
       default:
         return state;
     }
