@@ -1,4 +1,5 @@
 .navigator {
   display: flex;
+
   flex-wrap: wrap;
 }
