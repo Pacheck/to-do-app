@@ -9,7 +9,7 @@ import { combineReducers, createStore } from 'redux';
 import todosReducer from './redux/reducer/todos';
 
 const rootReducer = combineReducers({
-  landingTodos: todosReducer('Personal'),
+  personalTodos: todosReducer('Personal'),
   starredTodos: todosReducer('Starred'),
   finishedTodos: todosReducer('Finished'),
 });

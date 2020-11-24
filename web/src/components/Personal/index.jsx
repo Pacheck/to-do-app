@@ -14,7 +14,7 @@ const Personal = () => {
     const history = useHistory();
     const Personal = 'Personal'
 
-    const landingReducer = useSelector(state => state.landingTodos);
+    const landingReducer = useSelector(state => state.personalTodos);
 
     const handleNavigateHome = () => {
         history.push('/');
