@@ -12,7 +12,6 @@ const Task = ({ reducerType, task }) => {
 
     const [onEdit, setOnEdit] = useState(false);
     const [newInputValue, setNewInputValue] = useState('');
-    const [isChecked, setIsChecked] = useState(false);
 
     const dispatch = useDispatch();
 
