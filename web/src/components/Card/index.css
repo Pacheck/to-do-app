@@ -1,12 +1,24 @@
 .card {
-  border: 1px solid rgba(221, 218, 218, 0.863);
-  box-shadow: 1px 1px 5px rgb(138, 136, 136);
+  border: 1px solid rgba(241, 235, 235, 0.863);
 
-  /* width: 50%; */
+  background-color: rgb(255, 255, 255);
+
   min-width: 160px;
-  min-height: 100px;
+  min-height: 120px;
 
   border-radius: 5px;
 
   margin: 8px;
+}
+
+.card .personal {
+  color: rgb(22, 67, 119);
+}
+
+.card .starred {
+  color: rgb(230, 230, 98);
+}
+
+.card .finished {
+  color: tomato;
 }
