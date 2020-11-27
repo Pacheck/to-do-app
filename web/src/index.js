@@ -7,11 +7,13 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 import todosReducer from './redux/reducer/todos';
+import testeReducer from './redux/reducer/newTodos';
 
 const rootReducer = combineReducers({
-  personalTodos: todosReducer('Personal'),
-  starredTodos: todosReducer('Starred'),
-  finishedTodos: todosReducer('Finished'),
+  // personalTodos: todosReducer('Personal'),
+  // starredTodos: todosReducer('Starred'),
+  // finishedTodos: todosReducer('Finished'),
+  testeTodos: testeReducer(),
 });
 
 const store = createStore(
