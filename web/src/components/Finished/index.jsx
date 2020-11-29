@@ -10,10 +10,10 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { add, del } from '../../redux/actions'
 
 const Finished = () => {
-    const history = useHistory();
     const finishedReducer = useSelector(state => state.finishedTodos );
-
+    const history = useHistory();
     const dispatch = useDispatch(); 
+
 
     const handleNavigateHome = () => {
         history.push('/');
