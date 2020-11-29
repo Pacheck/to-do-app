@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 
 //Importing components
 import Categories from '../Categories';
-// import Personal from '../Personal';
-// import Starred from '../Starred';
 import Finished from '../Finished';
 import Category from '../Category';
 import NotFound from '../NotFound';
@@ -13,8 +11,6 @@ import './App.css';
 
 function App() {
   const testeReducer = useSelector((state) => state.testeTodos);
-
-  console.log(testeReducer);
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,7 +23,7 @@ function App() {
                 key={category.name}
                 path={`/${category.name}`}
                 tasks={category.tasks}
-                reducerType={category.name}
+                categoryName={category.name}
               />
             );
           })}
