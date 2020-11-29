@@ -1,17 +1,4 @@
 function createTodosReducer() {
-  // categoriasShape : [initialState, {...}, {...}, {...}]
-
-  // return state.map((category) => {
-  //   if (category.name === payload.categoryTask) {
-  //     return Object.assign(
-  //       {},
-  //       { name: category.name },
-  //       { tasks: [...category.tasks, payload] }
-  //     );
-  //   }
-  //   return state;
-  // });
-
   const initialState = [
     {
       name: 'personal',
@@ -28,30 +15,24 @@ function createTodosReducer() {
       tasks: [
         {
           id: '2222',
-          text: 'Focar em mim',
+          text: 'Praticar tarefas',
           categoryTask: 'starred',
         },
       ],
     },
     {
       name: 'finished',
-      tasks: [
-        {
-          id: '3333',
-          text: 'glub do starred',
-          categoryTask: 'starred',
-        },
-      ],
+      tasks: [],
     },
   ];
   return function todos(state = initialState, action) {
     const { type, payload } = action;
-    //payload : id, text, categoryTask
 
     const ADD = 'ADD';
     const DELETE = 'DELETE';
     const EDIT = 'EDIT';
     const FINISH = 'FINISH';
+    const FINISHED = 'finished';
     const CREATE_CATEGORY = 'CREATE_CATEGORY';
 
     switch (type) {
@@ -63,21 +44,35 @@ function createTodosReducer() {
         });
       case EDIT:
         return state.map((category) => {
-          if (category.name !== payload.categoryTask) {
-            return state;
-          }
-          return category.tasks.id === payload.id
-            ? (category.tasks = payload)
-            : category;
+          if (category.name !== payload.categoryTask) return category;
+
+          return {
+            ...category,
+            tasks: category.tasks.map((task) =>
+              task.id === payload.id ? (task = payload) : task
+            ),
+          };
         });
+
       case DELETE:
         return state.map((category) => {
-          return category.name === payload.categoryTask
-            ? category.tasks.filter((task) => task.id !== payload.id)
-            : category;
+          if (category.name !== payload.categoryTask) return category;
+
+          return {
+            ...category,
+            tasks: category.tasks.filter((task) => task.id !== payload.id),
+          };
         });
+
       case FINISH:
-        return state;
+        return state.map((category) => {
+          if (category.name !== FINISHED) return category;
+
+          return {
+            ...category,
+            tasks: category.tasks.concat(payload),
+          };
+        });
       case CREATE_CATEGORY:
         return state.concat(payload);
       default:
