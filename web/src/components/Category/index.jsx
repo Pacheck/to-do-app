@@ -6,19 +6,20 @@ import { useHistory } from 'react-router-dom';
 import Form from '../Form';
 import Task from '../Task';
 
-const Category = ({ tasks, reducerType, key}) => {
+const Category = ({ tasks, categoryName }) => {
     const history = useHistory();
     const handleNavigateHome = () => history.push('/');
 
     return (
         <div className="starred">
             < BsArrowLeft onClick={handleNavigateHome} />
+            {categoryName}
             <ul>
-                {tasks.map((task, index) => 
+                {tasks.map((task) => 
                     (
-                    <li key={index}>
+                    <li key={task.id}>
                         <Task 
-                            reducerType={reducerType}
+                            categoryName={categoryName}
                             task={task}  
                         />
                     </li>
@@ -26,7 +27,7 @@ const Category = ({ tasks, reducerType, key}) => {
                 )}
            </ul>
 
-            <Form reducerType={reducerType} />
+            <Form name={categoryName} />
         </div>
     )
 }
