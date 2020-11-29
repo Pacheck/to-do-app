@@ -3,22 +3,48 @@
 
   background-color: rgb(255, 255, 255);
 
-  min-width: 160px;
+  min-width: 164px;
   min-height: 120px;
 
-  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgb(241, 241, 238);
+  border-radius: 10px;
 
   margin: 8px;
 }
 
 .card .personal {
-  color: rgb(22, 67, 119);
+  color: rgb(62, 116, 179);
 }
 
 .card .starred {
-  color: rgb(230, 230, 98);
+  color: rgb(240, 190, 27);
 }
 
 .card .finished {
-  color: tomato;
+  color: rgb(37, 144, 10);
+}
+
+.card h4 {
+  color: rgb(39, 36, 36);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: var(--cardMarginLeft);
+}
+
+.card p {
+  color: rgb(144, 139, 139);
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: var(--cardMarginLeft);
+}
+
+.card svg {
+  /* margin-top: 5px;
+  margin-left: 14px; */
+  margin: 16px 0px 0px 14px;
+}
+
+.card div {
+  margin-top: 22px;
 }

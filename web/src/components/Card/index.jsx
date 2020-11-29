@@ -2,13 +2,15 @@ import React from 'react';
 
 import './index.css'
 
-const Card = ({ name, children, reducer }) => {
+const Card = ({ name, children, reducerLength }) => {
 
 
     return <div className="card">
         {children}
-        <h3>{name}</h3>
-        <p>{reducer.length} tasks</p>
+        <div>
+            <h4>{name}</h4>
+            <p>{reducerLength} tasks</p>
+        </div>
     </div>
 }
 
