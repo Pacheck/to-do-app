@@ -42,9 +42,10 @@ const Task = ({ task, categoryName }) => {
         console.log({ type: 'dispatch/edit', value: newInputValue})
     }
 
-    const handleDeleteTask = () => {
+    const handleDeleteTask = (categoryName) => {
         console.log(payload)
-        dispatch(del(payload));
+        categoryName ? dispatch(del({...payload, categoryTask: categoryName})) : dispatch(del(payload))
+        // dispatch(del(payload));
         console.log({ type: 'dispatch/delete', value: task.id})
     }
 
@@ -71,7 +72,7 @@ const Task = ({ task, categoryName }) => {
                     <h3>{task.text}</h3>
                     <div className="task-actions">
                         <MdEdit onClick={() => setOnEdit(true)} />
-                        <AiOutlineDelete onClick={handleDeleteTask}/>
+                        <AiOutlineDelete onClick={() => categoryName === FINISHED ? handleDeleteTask('finished') : handleDeleteTask()}/>
                     </div>
                 </div>}
         </div>
