@@ -6,7 +6,7 @@ import App from './components/App/App';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
-import todosReducer from './redux/reducer/todos';
+// import todosReducer from './redux/reducer/todos';
 import testeReducer from './redux/reducer/newTodos';
 
 const rootReducer = combineReducers({
