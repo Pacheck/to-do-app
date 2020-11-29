@@ -15,13 +15,13 @@ const Task = ({ reducerType, task }) => {
 
     const dispatch = useDispatch();
 
-    const { id, taskOwner, text } = task;
+    const { id, categoryTask, text } = task;
 
     const handleFinishTask = () => {
         const payload = {
-            taskOwner,
-            id,
-            text
+            id, // id
+            text, // text
+            categoryTask, //categoryTask
         }
 
         dispatch(finish('Finished', payload));

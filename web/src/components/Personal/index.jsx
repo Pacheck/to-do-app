@@ -7,24 +7,18 @@ import { useSelector } from 'react-redux';
 import Form from '../Form';
 import Task from '../Task'
 
-
 import './index.css'
 
 const Personal = () => {
+    const landingReducer = useSelector(state => state.personalTodos);
     const history = useHistory();
     const Personal = 'Personal'
 
-    const landingReducer = useSelector(state => state.personalTodos);
-
-    const handleNavigateHome = () => {
-        history.push('/');
-    }
+    const handleNavigateHome = () => history.push('/');
 
     return (
         <div className="personal">
-
             <BsArrowLeft onClick={handleNavigateHome}/>
-            
            <ul>
                 {landingReducer.map(task => {
                     return (
@@ -37,7 +31,7 @@ const Personal = () => {
                     )
                 })}
            </ul>
-
+           
             <Form reducerType={Personal} />
 
         </div>
