@@ -5,25 +5,22 @@ export const add = (payload) => {
   };
 };
 
-export const edit = (name, payload) => {
+export const edit = (payload) => {
   return {
-    name: name,
     type: 'EDIT',
     payload,
   };
 };
 
-export const del = (name, id) => {
+export const del = (payload) => {
   return {
-    name: name,
     type: 'DELETE',
-    payload: id,
+    payload,
   };
 };
 
-export const finish = (name, payload) => {
+export const finish = (payload) => {
   return {
-    name: name,
     type: 'FINISH',
     payload,
   };
