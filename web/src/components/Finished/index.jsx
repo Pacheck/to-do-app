@@ -22,8 +22,8 @@ const Finished = () => {
     const handleUncheckTask = (task) => {
         const payload = { ...task }
 
-        dispatch(add(payload.taskOwner, payload))
-        dispatch(del('Finished', payload.id))
+        dispatch(add(payload))
+        dispatch(del(payload))
         console.log({ type: 'dispatch/del', value: payload.id})
     }
 
