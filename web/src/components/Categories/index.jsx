@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { IoMdPerson } from 'react-icons/io'
-import { TiStarFullOutline } from "react-icons/ti";
-import { BiTask } from 'react-icons/bi'
-import AddButton from  '../AddButton'
+import { HiStar } from 'react-icons/hi'
 
 import Card from '../Card';
 
@@ -21,7 +18,7 @@ const Categories = ({ categories }) => {
                 {categories.map((category) => (
                     <Link to={`/${category.name}`} key={category.name}>
                         <Card name={category.name} reducerLength={category.tasks.length}>
-                            <IoMdPerson size={27} />
+                            <HiStar size={24} />
                         </Card>
                     </Link>
                 ))}
