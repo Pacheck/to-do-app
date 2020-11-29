@@ -15,14 +15,14 @@ const Form = ({ reducerType }) => {
         const value = e.target[0].value;
 
         const payload = {
-            text : value,
             id: uuid_v4(),
-            taskOwner: reducerType
+            text : value,
+            categoryTask: reducerType
         }
         
         console.log({ type: 'dispatch/add', payload: payload})
         
-        dispatch(add(reducerType, payload))
+        dispatch(add(payload))
 
         e.target[0].value = '';
     }
