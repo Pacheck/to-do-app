@@ -8,14 +8,11 @@ import Form from '../Form';
 import Task from '../Task';
 
 const Starred = () => {
-    const history = useHistory();
     const starredReducer = useSelector(state => state.starredTodos);
-
+    const history = useHistory();
     const Starred = 'Starred';
 
-    const handleNavigateHome = () => {
-        history.push('/');
-    }
+    const handleNavigateHome = () => history.push('/');
 
     return (
         <div className="starred">
