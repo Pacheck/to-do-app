@@ -6,7 +6,7 @@ import { add } from '../../redux/actions';
 
 import './index.css'
 
-const Form = ({ reducerType }) => {
+const Form = ({ name }) => {
 
     const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Form = ({ reducerType }) => {
         const payload = {
             id: uuid_v4(),
             text : value,
-            categoryTask: reducerType
+            categoryTask: name
         }
         
         console.log({ type: 'dispatch/add', payload: payload})
