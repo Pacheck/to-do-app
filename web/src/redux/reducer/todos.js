@@ -1,5 +1,5 @@
 function createTodosReducer(counterName = '') {
-  return function todos(state = [], action) {
+  return function todos(state = ['personal'], action) {
     const { name, type, payload } = action;
 
     if (name !== counterName) {
