@@ -25,3 +25,10 @@ export const finish = (payload) => {
     payload,
   };
 };
+
+export const create_category = (payload) => {
+  return {
+    type: 'CREATE_CATEGORY',
+    payload,
+  };
+};
