@@ -1,23 +1,49 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { BsArrowLeft } from 'react-icons/bs';
+// import { BiTask, BiDotsVerticalRounded } from 'react-icons/bi';
+import { IoMdAdd } from 'react-icons/io'
+
 import { useHistory } from 'react-router-dom';
 
 import Form from '../Form';
 import Task from '../Task';
+import TaskConfig from '../TaskConfig';
 
-const Category = ({ tasks, categoryName }) => {
+import './index.css'
+
+const Category = ({ tasks, categoryName, icon, color }) => {
     const history = useHistory();
     const handleNavigateHome = () => history.push('/');
 
+    const handleAddTask = () => {
+        console.log('handle add task')
+    }
+
+    const StyledWrapper = styled.div`
+        ${color? `background-color: ${color}` : `background-color: inherit`}
+    `
+
     return (
-        <div className="starred">
-            < BsArrowLeft onClick={handleNavigateHome} />
-            {categoryName}
-            <ul>
+        <StyledWrapper className="category-wrapper">
+            <div className="category-nav">
+                < BsArrowLeft onClick={handleNavigateHome} size={27}/>
+                <TaskConfig />
+            </div>
+
+            <div className="category-info">
+                <div>{icon}</div>
+                <h2>{categoryName}</h2>
+                <p>{tasks.length} tasks</p>
+            </div>
+            
+            {/* <input type="color" onChange={(e) => console.log(e.target.value)}/> */}
+
+            <ul className="tasks-list">
                 {tasks.map((task) => 
                     (
-                    <li key={task.id}>
+                    <li key={task.id}>  {console.log(categoryName)}
                         <Task 
                             categoryName={categoryName}
                             task={task}  
@@ -27,8 +53,20 @@ const Category = ({ tasks, categoryName }) => {
                 )}
            </ul>
 
-            <Form name={categoryName} />
-        </div>
+           <button className="add-task">
+               <IoMdAdd size={20} color='white'/>
+           </button>
+
+           {/* <BsPlusCircleFill className='add-task' size={37} onClick={handleAddTask} /> */}
+
+            
+            {categoryName !== 'Finished' 
+            ? 
+                <Form name={categoryName} /> 
+            : 
+                ''
+            }
+        </StyledWrapper>
     )
 }
 

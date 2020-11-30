@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro&family=Roboto+Slab:wght@400;500&display=swap');
+
+.category-wrapper {
+  background-color: rgba(116, 91, 91, 0.609);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.category-wrapper .category-nav {
+  display: flex;
+  height: 10vh;
+  justify-content: space-between;
+  margin: 0 15px;
+  padding: 10px 0;
+}
+
+.tasks-list {
+  height: 70vh;
+  background-color: rgb(240, 231, 231);
+  border-radius: 20px;
+  overflow: scroll;
+}
+
+.category-info {
+  height: 20vh;
+}
+
+.category-info div,
+p,
+h2 {
+  margin-left: 40px;
+}
+
+.category-info h2 {
+  color: rgb(241, 231, 231);
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
+  line-height: 1.8rem;
+  margin-top: 10px;
+}
+
+.category-info p {
+  font-family: 'Roboto Slab', serif;
+  color: rgba(233, 220, 220, 0.829);
+}
+
+.category-info div {
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+
+  padding: 5px 8px;
+  border-radius: 50%;
+}
+
+.add-task {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(82, 78, 78, 0.685);
+  box-shadow: 0 0 0.2em rgb(10, 58, 121);
+
+  background-color: rgb(70, 122, 207);
+
+  position: fixed;
+  bottom: 5%;
+  left: 85%;
+  outline: none;
+}
