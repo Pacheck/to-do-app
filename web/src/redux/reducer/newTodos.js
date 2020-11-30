@@ -1,27 +1,33 @@
 function createTodosReducer() {
   const initialState = [
     {
-      name: 'personal',
+      name: 'Personal',
+      icon: '',
+      color: '#257bcc',
       tasks: [
         {
           id: '1111',
           text: 'Estudar',
-          categoryTask: 'personal',
+          categoryTask: 'Personal',
         },
       ],
     },
     {
-      name: 'starred',
+      name: 'Starred',
+      icon: '',
+      color: '#d6ca1a',
       tasks: [
         {
           id: '2222',
           text: 'Praticar tarefas',
-          categoryTask: 'starred',
+          categoryTask: 'Starred',
         },
       ],
     },
     {
-      name: 'finished',
+      name: 'Finished',
+      icon: '',
+      color: '#12962f',
       tasks: [],
     },
   ];
@@ -32,7 +38,7 @@ function createTodosReducer() {
     const DELETE = 'DELETE';
     const EDIT = 'EDIT';
     const FINISH = 'FINISH';
-    const FINISHED = 'finished';
+    const FINISHED = 'FINISHED';
     const CREATE_CATEGORY = 'CREATE_CATEGORY';
 
     switch (type) {
@@ -66,7 +72,7 @@ function createTodosReducer() {
 
       case FINISH:
         return state.map((category) => {
-          if (category.name !== FINISHED) return category;
+          if (category.name.toUpperCase() !== FINISHED) return category;
 
           return {
             ...category,
