@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { add, edit, del, finish } from '../../redux/actions';
-
-import './index.css'
 
 import { MdEdit } from 'react-icons/md'
 import { ImCheckmark2 } from 'react-icons/im'
 import { AiOutlineDelete } from 'react-icons/ai'
+
+import TaskConfig from '../TaskConfig';
+import { add, edit, del, finish } from '../../redux/actions';
+
+import './index.css'
 
 const Task = ({ task, categoryName }) => {
 
     const [onEdit, setOnEdit] = useState(false);
     const [newInputValue, setNewInputValue] = useState('');
 
-    const FINISHED = 'finished';
+    const FINISHED = 'Finished';
 
     const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const Task = ({ task, categoryName }) => {
 
     const handleUncheckTask = () => {   
         dispatch(add(payload))
-        dispatch(del({...payload, categoryTask: 'finished'}))
+        dispatch(del({...payload, categoryTask: FINISHED}))
         console.log({ type: 'dispatch/uncheck', value: task})
     }
 
@@ -45,13 +47,12 @@ const Task = ({ task, categoryName }) => {
     const handleDeleteTask = (categoryName) => {
         console.log(payload)
         categoryName ? dispatch(del({...payload, categoryTask: categoryName})) : dispatch(del(payload))
-        // dispatch(del(payload));
         console.log({ type: 'dispatch/delete', value: task.id})
     }
 
     return (
         <div className="task-container">
-            
+
             {onEdit 
             ? 
                 <div>
@@ -65,15 +66,16 @@ const Task = ({ task, categoryName }) => {
                 </div>
             :
                 <div className="task">
+                    
+                    <h3>{task.text}</h3>
+                    <div className="task-actions">
+                        <MdEdit onClick={() => setOnEdit(true)} />
+                        <AiOutlineDelete onClick={() => categoryName === FINISHED ? handleDeleteTask(FINISHED) : handleDeleteTask()}/>
+                    </div>
                     <input type="checkbox" 
                         defaultChecked={categoryName === FINISHED}
                         onClick={categoryName === FINISHED ? handleUncheckTask : handleFinishTask} 
                     />
-                    <h3>{task.text}</h3>
-                    <div className="task-actions">
-                        <MdEdit onClick={() => setOnEdit(true)} />
-                        <AiOutlineDelete onClick={() => categoryName === FINISHED ? handleDeleteTask('finished') : handleDeleteTask()}/>
-                    </div>
                 </div>}
         </div>
     )        

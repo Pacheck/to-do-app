@@ -1,8 +1,12 @@
 import React from 'react';
 
 import { Link } from "react-router-dom";
+
 import { IoMdPerson } from 'react-icons/io'
-import { HiStar } from 'react-icons/hi'
+
+import { BiTask } from 'react-icons/bi';
+import { MdSort } from 'react-icons/md'
+
 
 import Card from '../Card';
 
@@ -18,7 +22,7 @@ const Categories = ({ categories }) => {
                 {categories.map((category) => (
                     <Link to={`/${category.name}`} key={category.name}>
                         <Card name={category.name} reducerLength={category.tasks.length}>
-                            <HiStar size={24} />
+                            <BiTask size={24} />
                         </Card>
                     </Link>
                 ))}
