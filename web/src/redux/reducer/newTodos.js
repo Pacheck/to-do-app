@@ -1,37 +1,5 @@
 function createTodosReducer() {
-  const initialState = [
-    {
-      name: 'Personal',
-      icon: '',
-      color: '#257bcc',
-      tasks: [
-        {
-          id: '1111',
-          text: 'Estudar',
-          categoryTask: 'Personal',
-        },
-      ],
-    },
-    {
-      name: 'Starred',
-      icon: '',
-      color: '#d6ca1a',
-      tasks: [
-        {
-          id: '2222',
-          text: 'Praticar tarefas',
-          categoryTask: 'Starred',
-        },
-      ],
-    },
-    {
-      name: 'Finished',
-      icon: '',
-      color: '#12962f',
-      tasks: [],
-    },
-  ];
-  return function todos(state = initialState, action) {
+  return function todos(state = [], action) {
     const { type, payload } = action;
 
     const ADD = 'ADD';
@@ -80,7 +48,13 @@ function createTodosReducer() {
           };
         });
       case CREATE_CATEGORY:
-        return state.concat(payload);
+        const existedCategory = state.find(
+          (category) => category.name === payload.name
+        );
+
+        if (!existedCategory) return [...state, payload];
+
+        return state;
       default:
         return state;
     }
