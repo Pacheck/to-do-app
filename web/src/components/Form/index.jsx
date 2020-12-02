@@ -2,11 +2,11 @@ import React from 'react';
 import { v4 as uuid_v4 } from "uuid";
 import { useDispatch } from 'react-redux';
 
-import { add } from '../../redux/actions';
+import { add, create_category } from '../../redux/actions';
 
 import './index.css'
 
-const Form = ({ name }) => {
+const Form = ({ categoryName }) => {
 
     const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Form = ({ name }) => {
         const payload = {
             id: uuid_v4(),
             text : value,
-            categoryTask: name
+            categoryTask: categoryName
         }
         
         console.log({ type: 'dispatch/add', payload: payload})
@@ -31,7 +31,7 @@ const Form = ({ name }) => {
         <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Adicione uma task"/>
                 <button type="submit">Adicionar a tasks</button>
-            </form>
+        </form>
     )
 }
 
