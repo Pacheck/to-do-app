@@ -1,54 +1,217 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { create_category } from '../../redux/actions';
 
+import { IoMdPerson, IoMdLock, IoMdUnlock, IoIosKey, IoIosPaper, IoMdFitness } from 'react-icons/io';
+import { BiTask } from 'react-icons/bi';
+import { HiStar } from 'react-icons/hi';
+import { MdPayment } from 'react-icons/md'
 
 const AddNewCategory = styled.div`
-    background-color: tomato;
+    
+    width: 100vw;
+    height: 100vh;
+    background-color: #d8b7b2;
+
+    form {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 100px;
+        }
+
+        .category-name input {
+            width: 80%;
+            height: 100px;
+            border: none;
+            text-align: center;
+            
+            margin-top: 15px;
+            background-color: transparent;
+            outline: none;
+        }
+
+       
+        
+    }
+`
+const Modal = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: fixed;
+    ${props => props.showModal ? 'z-index: 10' : 'z-index: -10'}
+
+    top: 0; bottom: 0; left: 0; right: 0;
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .wrapper {
+        width: 60%;
+        height: 40%;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 2em #706161;
+
+        border-radius: 5%;
+        background: linear-gradient(#7c0707, #df4646);
+    }
+
+    /* div {
+        width: 2rem;
+        background-color: aquamarine;
+    } */
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        width: 3.3rem;
+        height: 3.3rem;
+        border-radius: 5px;
+        align-items: center;
+    }
+
+    .icon:hover {  
+        svg {
+            color: #f5f0f0;
+        }
+        background-color: #5d0c0c
+    }
 `
 
 const AddCategory = () => {
 
+    const [showModal, setShowModal] = useState(false);
+
     const { register, handleSubmit, watch, errors } = useForm();
-
-    const onSubmit = data => console.log(data);
+    
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    const history = useHistory()
-
-    const payload = {
-        name: 'teste2',
-        icon: 'category-icon',
-        color: '#a33aaa',
-        tasks: ['Testando create category']
+    const onSubmit = data => createCategory(data);
+        
+    const createCategory = data => {
+        const icon = getIcon(data);
+        
+        const payload = {
+            ...data,
+            icon: icon,
+            id: Math.random(), //TEMPORARIO
+            tasks: []
+        }
+        dispatch(create_category(payload));
+        
+        console.log(payload);
     }
 
-    // dispatch(create_category(payload))
-    // console.log({ type: 'dispatch/create_category', payload: payload})
+    const getIcon = (data) => {
+        const { icon, color } = data;
+        switch(icon){
+            case 'person':
+                return <IoMdPerson size={22} color={color} />
+                case 'secret':
+                    return <IoMdLock size={22} color={color}/>
+                    case 'fitness':
+                    return <IoMdFitness size={22} color={color}/>
+            default:
+                return 'Sem ícone'
+        }
+    }
 
+    const handleModal = () => {
+        setShowModal(!showModal);
+    }
+    
+    const handleIcon = (icon) => {
+        console.log(icon)
+    }
+
+    const FITNESS = 'Fitness';
+    const SECRET = 'Secret';
+    const NOT_SECRET = 'Not-Secret';
+    const PERSONAL = 'Personal';
+    const KEY = 'Key';
+    const DOCUMENT = 'Document';
 
     return (
-        <AddNewCategory>
-            
-            <button onClick={() => history.push('/')}>Voltar</button>
-
+        <AddNewCategory showModal={showModal}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <label>Category Name</label>
-                <input name="name" defaultValue="Personal" ref={register} />
+                {/* <button onClick={() => history.push('/')}>Voltar</button> 
+                    //VAI SER UM SVG PRA VOLTAR
+                */}
+
+                <div className="category-name">
+                    <label >Category Name</label>
+                    <input  name="name" placeholder="Personal" ref={register({ required: true})} />
+                    {errors.name && <p style={{ color: 'red'}}>This field is required</p>}
+                </div>
                 
-                <label>Color</label>
-                <input name="color" type="color" ref={register} />
+                <div className="category-color">
+                    <label className="label-color">Color</label>
+                    <input className="input-color" name="color" type="color" ref={register} />
+                </div>
 
-                <label>Icon</label>
-                <input name="name" defaultValue="Personal" ref={register} />
+                <div className="category-icon">
+                    <label>Selecioe um ícone</label>
+                    <button  type="button" onClick={handleModal}>Show Icons</button>
+                </div>
 
-                
-
-                <input type="submit" />
+                <input className="input-button" type="submit" value="Create"/>
             </form>
-          
+            
+
+            {showModal && 
+                <Modal handleModal={handleModal} showModal={showModal}>
+                    <div className="wrapper">
+                        <div className="icon" onClick={() => handleIcon(FITNESS)}>
+                            <IoMdFitness size={35} />
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(SECRET)}>
+                            <IoMdLock size={35} />
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(PERSONAL)}>
+                            <IoMdPerson size={35} />
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(NOT_SECRET)}>
+                            <IoMdUnlock size={35}/>
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(KEY)}>
+                            <IoIosKey size={35}/>
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(DOCUMENT)}>
+                            <IoIosPaper size={35}/>
+                        </div>
+                        <div className="icon" onClick={() => handleIcon(DOCUMENT)}>
+                            <MdPayment size={35} />
+                        </div>
+                    </div>
+                        <button type="button" onClick={handleModal}>Select</button>
+                </Modal>
+                }
+       
         </AddNewCategory>
     )
 }
