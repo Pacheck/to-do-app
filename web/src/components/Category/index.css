@@ -17,14 +17,15 @@
 }
 
 .tasks-list {
-  height: 70vh;
+  width: 100vw;
+  height: 66vh;
   background-color: rgb(240, 231, 231);
-  border-radius: 20px;
-  overflow: scroll;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
 }
 
 .category-info {
-  height: 20vh;
+  height: 24vh;
 }
 
 .category-info div,
@@ -55,6 +56,10 @@ h2 {
   border-radius: 50%;
 }
 
+.category-info svg {
+  margin-top: 2px;
+}
+
 .add-task {
   width: 50px;
   height: 50px;
@@ -66,7 +71,7 @@ h2 {
   background-color: rgb(70, 122, 207);
 
   position: fixed;
-  bottom: 5%;
-  left: 85%;
+  bottom: 3%;
+  left: 80%;
   outline: none;
 }
