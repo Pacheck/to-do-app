@@ -86,7 +86,7 @@ function App() {
             />
           ))}
 
-          <Route path="/add-category" component={AddCategoryRoute} />
+          <AddCategoryRoute path="/add-category" />
 
           <Route path="/finalizados" component={Finished} />
 
