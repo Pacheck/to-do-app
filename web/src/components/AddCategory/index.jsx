@@ -74,6 +74,20 @@ const AddNewCategory = styled.div`
             }
         }
 
+        .category-color {
+            label {
+                font-size: 14px;
+                color: var(--grayTextColor);
+                margin-right: 190px;
+            }
+
+            input {
+                margin-top: 12px;
+                margin-right: 243px;
+            }
+
+        }
+
         .input-button {
             width: 100%;
             height: 40px;
@@ -220,8 +234,8 @@ const AddCategory = () => {
                 </div>
                 
                 <div className="category-color">
-                    <label className="label-color">Color</label>
-                    <input className="input-color" name="color" type="color" ref={register} />
+                    <label className="label-color">Category color:</label>
+                    <input className="input-color" name="color" type="color" ref={register} defaultValue='#1299D3'/>
                 </div>
 
                 <div className="category-icon">
