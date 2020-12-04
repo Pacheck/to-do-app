@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro&family=Roboto+Slab:wght@400;500&display=swap');
+
 :root {
-  --white: #fff;
   --cardMarginLeft: 15px;
+  --appBackground: linear-gradient(rgb(248, 245, 245), rgb(245, 243, 243));
+  --defaultTextColor: rgb(46, 44, 44);
+  --whiteTextColor: rgb(231, 218, 218);
 }
 
 .App {
   width: 100vw;
   height: 100vh;
 
-  background: linear-gradient(rgb(248, 245, 245), rgb(245, 243, 243));
+  background: var(--appBackground);
 }
 
 header {
