@@ -9,17 +9,20 @@ import { create_category } from '../../redux/actions';
 import { IoMdPerson, IoMdLock, IoMdUnlock, IoIosKey, IoIosPaper, IoMdFitness } from 'react-icons/io';
 import { BiTask } from 'react-icons/bi';
 import { HiStar } from 'react-icons/hi';
-import { MdPayment } from 'react-icons/md'
+import { MdPayment, MdClose } from 'react-icons/md'
 
 const AddNewCategory = styled.div`
     
     width: 100vw;
     height: 100vh;
-    background-color: #d8b7b2;
+    background: var(--appBackground);
 
     form {
         width: 100%;
         height: 100%;
+
+        font-family: 'Roboto Slab', serif;
+        color: var(--defaultTextColor);
 
         display: flex;
         flex-direction: column;
@@ -29,21 +32,63 @@ const AddNewCategory = styled.div`
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            margin-top: 100px;
+            margin-top: 60px;
         }
 
-        .category-name input {
-            width: 80%;
-            height: 100px;
+        .nav {
+     
+            flex-direction: row;
+
+            h4 {
+                font-weight: 500; 
+                margin-left: 120px;
+            }
+
+            svg {
+                margin-left: 90px;
+            }
+        }
+
+        .category-name {
+            input {
+                width: 80%;
+                height: 22px;
+                border: none;
+                /* text-align: center; */
+                
+                font-size: 25px;
+                
+                margin-top: 15px;
+                background-color: transparent;
+                outline: none;
+            }
+
+            input::placeholder{
+                color: #c5bbbb;
+            }
+
+            label {
+                color: #949090;
+                font-size: 14px;
+                margin-right: 180px;
+            }
+        }
+
+        .input-button {
+            width: 100%;
+            height: 40px;
+
+            border-radius: 0;
             border: none;
-            text-align: center;
-            
-            margin-top: 15px;
-            background-color: transparent;
-            outline: none;
-        }
 
-       
+            color: var(--whiteTextColor);
+            background-color: #2c6bcf;
+
+            padding: 0 2px;
+            position: fixed;
+            bottom: 0;
+            
+        }
         
     }
 `
@@ -163,8 +208,13 @@ const AddCategory = () => {
                     //VAI SER UM SVG PRA VOLTAR
                 */}
 
+                <div className="nav">
+                    <h4 className="nav-title">New Category</h4>
+                    <MdClose size={27} onClick={() => history.push('/')}/>
+                </div>
+
                 <div className="category-name">
-                    <label >Category Name</label>
+                    <label >Category name?</label>
                     <input  name="name" placeholder="Personal" ref={register({ required: true})} />
                     {errors.name && <p style={{ color: 'red'}}>This field is required</p>}
                 </div>
