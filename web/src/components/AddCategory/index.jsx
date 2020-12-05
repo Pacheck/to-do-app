@@ -50,15 +50,20 @@ const AddNewCategory = styled.div`
         }
 
         .category-name {
+
+            width: 57vw;
+
             input {
-                width: 80%;
-                height: 22px;
+                
+                height: 40px;
                 border: none;
                 /* text-align: center; */
                 
                 font-size: 25px;
                 
-                margin-top: 15px;
+                margin-top: 10px;
+                margin-left: 179px;
+
                 background-color: transparent;
                 outline: none;
             }
@@ -70,22 +75,35 @@ const AddNewCategory = styled.div`
             label {
                 color: #949090;
                 font-size: 14px;
-                margin-right: 180px;
+                margin-right: 25px;
             }
         }
 
         .category-color {
+
+            width: 57vw;
+
             label {
                 font-size: 14px;
                 color: var(--grayTextColor);
-                margin-right: 190px;
+                margin-right: 33px;
             }
 
             input {
+                width: 100px;
                 margin-top: 12px;
-                margin-right: 243px;
+                margin-right: 33px;
             }
 
+        }
+
+        .category-icon {
+            width: 57vw;
+            
+            label {
+                color: var(--grayTextColor);
+
+            }
         }
 
         .input-button {
@@ -164,6 +182,7 @@ const Modal = styled.div`
 const AddCategory = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [selectedIcon, setSelectedIcon] = useState('');
 
     const { register, handleSubmit, watch, errors } = useForm();
     
@@ -173,7 +192,8 @@ const AddCategory = () => {
     const onSubmit = data => createCategory(data);
         
     const createCategory = data => {
-        const icon = getIcon(data);
+      
+        const icon = getIcon(data)
         
         const payload = {
             ...data,
@@ -187,16 +207,28 @@ const AddCategory = () => {
     }
 
     const getIcon = (data) => {
-        const { icon, color } = data;
+        const { color } = data;
+        const icon = selectedIcon ? selectedIcon : '';
+
         switch(icon){
-            case 'person':
+            case PERSONAL:
                 return <IoMdPerson size={22} color={color} />
-                case 'secret':
-                    return <IoMdLock size={22} color={color}/>
-                    case 'fitness':
-                    return <IoMdFitness size={22} color={color}/>
+            case SECRET:
+                return <IoMdLock size={22} color={color}/>
+            case FITNESS:
+                return <IoMdFitness size={22} color={color}/>
+            case NOT_SECRET:
+                return <IoMdUnlock size={22} color={color}/>
+            case KEY:
+                return <IoIosKey size={22} color={color}/>
+            case NOT_SECRET:
+                return <IoIosPaper size={22} color={color}/>
+            case PAYMENT:
+                return <MdPayment size={22} color={color}/>
+            case STAR:
+                return <HiStar size={22} color={color}/>
             default:
-                return 'Sem ícone'
+                return <IoIosPaper size={22} color={color}/>
         }
     }
 
@@ -205,7 +237,7 @@ const AddCategory = () => {
     }
     
     const handleIcon = (icon) => {
-        console.log(icon)
+        setSelectedIcon(icon);
     }
 
     const FITNESS = 'Fitness';
@@ -214,6 +246,8 @@ const AddCategory = () => {
     const PERSONAL = 'Personal';
     const KEY = 'Key';
     const DOCUMENT = 'Document';
+    const PAYMENT = 'Payment';
+    const STAR = 'Star';
 
     return (
         <AddNewCategory showModal={showModal}>
@@ -268,9 +302,13 @@ const AddCategory = () => {
                         <div className="icon" onClick={() => handleIcon(DOCUMENT)}>
                             <IoIosPaper size={35}/>
                         </div>
-                        <div className="icon" onClick={() => handleIcon(DOCUMENT)}>
+                        <div className="icon" onClick={() => handleIcon(PAYMENT)}>
                             <MdPayment size={35} />
                         </div>
+                        <div className="icon" onClick={() => handleIcon(STAR)}>
+                            <HiStar size={35} />
+                        </div>
+
                     </div>
                         <button type="button" onClick={handleModal}>Select</button>
                 </Modal>
