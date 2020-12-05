@@ -198,12 +198,12 @@ const AddCategory = () => {
         const payload = {
             ...data,
             icon: icon,
-            id: Math.random(), //TEMPORARIO
+            // id: Math.random(), //TEMPORARIO
             tasks: []
         }
         dispatch(create_category(payload));
-        
-        console.log(payload);
+        console.log({ type: 'Dispatch/add', value: payload });
+        history.push('/');
     }
 
     const getIcon = (data) => {
