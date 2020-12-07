@@ -30,11 +30,12 @@ const AddTask = ({ categoryName }) => {
         dispatch(add(payload));
 
         console.log(payload);
+        history.push(`/${categoryName}`);
     };
 
     return (
         <Task className="task-container">
-            <button onClick={() => history.push('/')}>Voltar</button>
+            <button onClick={() => history.push(`/${categoryName}`)}>Voltar</button>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="task">What are you planning?</label>
