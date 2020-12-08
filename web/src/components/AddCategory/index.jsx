@@ -263,7 +263,7 @@ const AddCategory = () => {
 
                 <div className="category-name">
                     <label >Category name?</label>
-                    <input  name="name" placeholder="Personal" ref={register({ required: true})} />
+                    <input  name="name" placeholder="e.g. Personal" ref={register({ required: true})} autoFocus/>
                     {errors.name && <p style={{ color: 'red'}}>This field is required</p>}
                 </div>
                 
