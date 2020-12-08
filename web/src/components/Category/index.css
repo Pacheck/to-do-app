@@ -16,11 +16,15 @@
   padding: 10px 0;
 }
 
+.task-wrapper {
+  margin-top: 20px;
+}
+
 .tasks-list {
   width: 100vw;
   height: 66vh;
   background-color: rgb(240, 231, 231);
-  border-radius: 20px 20px 0 0;
+  border-radius: 30px 30px 0 0;
   overflow: hidden;
 }
 

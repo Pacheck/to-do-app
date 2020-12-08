@@ -44,16 +44,18 @@ const Category = ({ tasks, categoryName, icon, color }) => {
             </div>
 
             <ul className="tasks-list">
-                {tasks.map((task) => 
-                    (
-                    <li key={task.id}>  {console.log(categoryName)}
-                        <Task 
-                            categoryName={categoryName}
-                            task={task}  
-                        />
-                    </li>
-                    )
-                )}
+                <div className="task-wrapper">
+                    {tasks.map((task) =>
+                        (
+                        <li key={task.id} className="task-container">
+                            <Task 
+                                categoryName={categoryName}
+                                task={task}  
+                            />
+                        </li>
+                        )
+                    )}
+                </div>
            </ul>
 
           
