@@ -51,11 +51,13 @@ const Task = ({ task, categoryName }) => {
     }
 
     return (
-        <div className="task-container">
+        
+        
+        <div>
 
             {onEdit 
             ? 
-                <div>
+                <div className="task">
                     <input 
                     autoFocus
                     defaultValue={task.text}    
@@ -66,18 +68,23 @@ const Task = ({ task, categoryName }) => {
                 </div>
             :
                 <div className="task">
-                    
+
                     <h3>{task.text}</h3>
-                    <div className="task-actions">
-                        <MdEdit onClick={() => setOnEdit(true)} />
-                        <AiOutlineDelete onClick={() => categoryName === FINISHED ? handleDeleteTask(FINISHED) : handleDeleteTask()}/>
-                    </div>
-                    <input type="checkbox" 
+                    {/* <div className="task-actions">
+                    <MdEdit onClick={() => setOnEdit(true)} />
+                    <AiOutlineDelete onClick={() => categoryName === FINISHED ? handleDeleteTask(FINISHED) : handleDeleteTask()}/>
+                    </div> OMMITED ACTIONS BY NOW  */}  
+                    <div className="container">
+                        <input type="checkbox" 
                         defaultChecked={categoryName === FINISHED}
-                        onClick={categoryName === FINISHED ? handleUncheckTask : handleFinishTask} 
-                    />
+                        // onClick={categoryName === FINISHED ? handleUncheckTask : handleFinishTask}   
+                        />
+                        <span className="checkmark" onClick={categoryName === FINISHED ? handleUncheckTask : handleFinishTask}></span>
+                    </div>
                 </div>}
         </div>
+            
+        
     )        
 
 }
